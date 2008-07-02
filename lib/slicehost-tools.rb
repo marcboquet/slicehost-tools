@@ -10,4 +10,4 @@ end
 $: << File.expand_path( File.dirname(__FILE__) )
                                                  
 require 'slicehost-tools/extlib'
-require 'slicehost-tools'
+require :"slicehost-tools" / :tools
