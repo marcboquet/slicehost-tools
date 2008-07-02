@@ -1,18 +1,15 @@
-slicehost-tools
-===============
+# slicehost-tools
 
 Manage Slicehost Slices and DNS records/zones from the command line. 
 
-WARNING
-=======
+## WARNING
 
 I am not responsible if this eats your data, destroys your life, and sleeps with your wife. YOU HAVE BEEN WARNED.
 
-Installation
-============
+## Installation
 
-git clone git://github.com/wycats/thor.git
-git clone git://github.com/cameroncox/slicehost-tools.git
+git clone git://github.com/wycats/thor.git  
+git clone git://github.com/cameroncox/slicehost-tools.git  
 
     cd thor
     rake install
@@ -24,9 +21,7 @@ git clone git://github.com/cameroncox/slicehost-tools.git
 and bob's you uncle!
 
 
-TODO
-====
+## TODO
 
-[DONE] Finish up the slice tool
-
-Multiple Slicehost accounts? (not likely, but an idea)       
+[DONE] Finish up the slice tool  
+Multiple Slicehost accounts? (not likely, but an idea)         
