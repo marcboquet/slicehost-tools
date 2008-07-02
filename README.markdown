@@ -9,17 +9,12 @@ Installation
 git clone git://github.com/wycats/thor.git
 git clone git://github.com/cameroncox/slicehost-tools.git
 
-cd thor
-
-rake install
-
-cd ..
-
-cd slicehost-tools
-
-rake gem
-
-sudo gem install --local pkg/slicehost-tools-0.0.1.gem
+    cd thor
+    rake install
+    cd ..
+    cd slicehost-tools
+    rake gem
+    sudo gem install --local pkg/slicehost-tools-0.0.1.gem
 
 and bob's you uncle!
 
