@@ -2,8 +2,7 @@ module Resources
   class Slice < Base 
     class << self
       def find_by_name(name)                           
-        slice_id = find(:all).reject! { |r| r.name != name }.map { |slice| slice.id }
-        find(slice_id)
+        find(:first, :params => { :name => name })
       end
     end
   end
