@@ -12,6 +12,9 @@ module Resources
         find(:all).reject { |z| z.origin != "#{origin}." }[0]
       end
     end
+    
+    def new_zone_and_records_for(domain, ip)
+    end
   end
   
   class Record < Base
