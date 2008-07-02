@@ -27,5 +27,5 @@ and bob's you uncle!
 TODO
 ====
 
--Finish up the slice tool-       
-       
+[DONE] Finish up the slice tool
+       Multiple Slicehost accounts? (not likely, but an idea)       
