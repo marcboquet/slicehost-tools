@@ -21,10 +21,10 @@ module Tools
     def delete(domain = nil)
       abort "You must give a domain" if domain.nil?
       
-      print "are you sure you want to do this? [y/N] "
+      puts "Type the phrase \"Bob's your uncle\" to remove this zone"
       @sure = false
       case STDIN.gets.chomp
-      when /Y/
+      when "Bob's your uncle"
         @sure = true
       end
       

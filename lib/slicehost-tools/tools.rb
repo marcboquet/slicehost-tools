@@ -2,9 +2,9 @@ module Tools
   
   class Default < Thor
     
-    desc "set_api_key [APIKEY]",
+    desc "apikey [APIKEY]",
          "set your Slicehost API Key and save it to ~/.slicehost-tools"
-    def set_api_key(apikey = nil)
+    def apikey(apikey = nil)
       @write_file = false
       unless File.exists? ENV['HOME'] / '.slicehost-tools' 
         @write_file = true
@@ -18,7 +18,7 @@ module Tools
       end
       
       # ask for api key if none is given
-      if apikey.nil?
+      if apikey.nil? && @write_file
         puts "Please enter your API key since you did not provide one: "
         apikey = STDIN.gets.chomp
       end
