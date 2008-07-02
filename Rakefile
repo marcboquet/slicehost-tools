@@ -1,4 +1,8 @@
-Gem::Specification.new do |s|
+require 'rubygems'
+require 'rake'
+require 'rake/gempackagetask'
+
+gem_spec = Gem::Specification.new do |s|
   s.name = %q{slicehost-tool}
   s.version = "0.0.1"
  
@@ -22,4 +26,4 @@ Rake::GemPackageTask.new(gem_spec) do |p|
   p.gem_spec = gem_spec
   p.need_tar = true
   p.need_zip = true
-end  
+end
