@@ -31,6 +31,29 @@ module Tools
       
     end
     
+    desc "delete [SLICE]", "delete a slice" 
+    def delete(slice_name = nil)
+      abort "please provide a slice name" if slice_name.nil?
+        
+      @abort = true
+      slice = Resources::Slice.find_by_name(slice_name)
+      puts "Please type 'I understand this is not undoable' to proceed: "
+      case STDIN.gets.chomp
+      when "I understand this is not undoable"
+        @abort = false
+      end
+      
+      unless @abort
+        puts "Say goodnight gracie."
+        slice.destroy
+        sleep 3
+        puts "Goodnight gracie."   
+      else
+        puts "Your slice has not been nuked. (I hope)"
+      end
+      
+    end
+    
     desc "list", "list slices"
     def list
       Resources::Slice.find(:all).each do |slice|
