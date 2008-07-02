@@ -1,12 +1,12 @@
 slicehost-tools
 ===============
 
+Manage Slicehost Slices and DNS records/zones from the command line. 
+
 WARNING
 =======
 
 I am not responsible if this eats your data, destroys your life, and sleeps with your wife. YOU HAVE BEEN WARNED.
-
-Manage Slicehost Slices and DNS records/zones from the command line. 
 
 Installation
 ============
