@@ -32,8 +32,8 @@ module Tools
     end
     
     desc "delete [SLICE]", "delete a slice" 
-    def delete(slice_name = nil)
-      abort "please provide a slice name" if slice_name.nil?
+    def delete(slice_name = nil)                            
+      slice_name = select_slice.name if slice_name.nil?
         
       @abort = true
       slice = Resources::Slice.find_by_name(slice_name)
@@ -63,15 +63,15 @@ module Tools
 
     desc "hard_reboot [SLICE]", "perform a hard reboot"
     def hard_reboot(slice_name = nil)
-      abort "please provide a slice name" if slice_name.nil?
+      slice_name = select_slice.name if slice_name.nil?
       
       puts "(hard) rebooting #{slice_name}"                      
       reboot(:hard_reboot, slice_name)
     end              
 
     desc "soft_reboot [SLICE]", "perform a soft reboot"
-    def soft_reboot(slice_name = nil)
-      abort "please provice a slice name" if slice_name.nil?
+    def soft_reboot(slice_name = nil)                       
+      slice_name = select_slice.name if slice_name.nil?
       
       puts "(soft) rebooting #{slice_name}"
       reboot(:reboot, slice_name)
@@ -79,17 +79,25 @@ module Tools
 
 
     protected
+       
+      def select_slice
+        slices = Resources::Slice.find(:all)
+        slices.each_index { |i| puts "[#{i}] #{slices[i].name}" }
+        print "Select a Slice by #: "
+        input = STDIN.gets.chomp.to_i
+        slices[input]
+      end
 
       def select_image_from(images)
         images.each_index { |i| puts "[#{i}] #{images[i].name}" } 
-        print "Select an Image by ID: "
+        print "Select an Image by #: "
         input = STDIN.gets.chomp.to_i
         images[input].id
       end
 
       def select_flavor_from(flavors)
         flavors.each_index { |i| puts "[#{i}] #{flavors[i].name} (#{flavors[i].ram}mb) ($#{flavors[i].price}/month)" }
-        print "Select an Image by ID: "
+        print "Select an Image by #: "
         input = STDIN.gets.chomp.to_i
         flavors[input].id
       end
