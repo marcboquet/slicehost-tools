@@ -28,4 +28,5 @@ TODO
 ====
 
 [DONE] Finish up the slice tool
-       Multiple Slicehost accounts? (not likely, but an idea)       
+
+Multiple Slicehost accounts? (not likely, but an idea)       
