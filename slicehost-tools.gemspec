@@ -11,9 +11,10 @@ Gem::Specification.new do |s|
   s.email = %q{cameroncox@gmail.com}
   s.executables = ["slicehost-dns", "slicehost-slice"]
   s.extra_rdoc_files = ["README.markdown", "LICENSE"]
-  s.files = Dir['**/**']
+  s.files = Dir['**/**'].reject!{ |f| f =~ /pkg/i }
   s.has_rdoc = false
   s.homepage = %q{http://github.com/cameroncox/slicehost-tools/}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.1.1}      
+  s.rubygems_version = %q{1.1.1}
+  s.add_dependency("thor", ">= 0.9.2")      
 end
