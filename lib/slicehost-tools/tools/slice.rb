@@ -1,6 +1,8 @@
 require :"slicehost-tools" / :resources / :slice
 module Tools
   class Slice < Default
+     
+    map "-L" => :list
     
     desc "add [SLICE NAME]", "add a new slice"
     method_options :force => :boolean

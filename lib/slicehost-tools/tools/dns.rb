@@ -2,6 +2,8 @@ require :"slicehost-tools" / :resources / :dns
 module Tools
   class DNS < Default
     
+    map "-L" => :list
+    
     desc "add [DOMAIN] [IP]", "add a domain for the given ip"
     def add(domain = nil, ip = nil)
       unless domain
