@@ -4,7 +4,7 @@ require 'rake/gempackagetask'
 
 gem_spec = Gem::Specification.new do |s|
   s.name = %q{slicehost-tool}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
  
   s.specification_version = 2 if s.respond_to? :specification_version=
  

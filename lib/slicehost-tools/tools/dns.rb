@@ -56,8 +56,6 @@ module Tools
     end
 
     # init Thor
-    start
-    
-    
+    start 
   end
 end

@@ -44,6 +44,8 @@ module Tools
       end
       
       unless @abort
+        puts "You have 5 seconds to change your mind (CTRL+C)"
+        sleep 5
         puts "Say goodnight gracie."
         slice.destroy
         sleep 3

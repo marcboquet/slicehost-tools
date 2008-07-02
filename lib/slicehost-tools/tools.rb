@@ -26,7 +26,7 @@ module Tools
       # write the api key to file
       if @write_file
         File.open( ENV['HOME'] / '.slicehost-tools', File::RDWR|File::TRUNC|File::CREAT, 0664 ) do |f|
-          f.puts "SlicehostSecretKey = '#{apikey}"
+          f.puts "SlicehostSecretKey = '#{apikey}'"
           f.close
         end
       end
