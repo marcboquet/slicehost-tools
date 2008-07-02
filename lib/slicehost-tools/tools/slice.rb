@@ -17,7 +17,7 @@ module Tools
       @add = false
       # confirm  you want to do this, it does cost money
       unless opts[:force]     
-        print "Are you sure you wanna do this? [y/N]: "
+        print "Are you sure you want do this? [y/N]: "
         case STDIN.gets.chomp
         when /y/i
           @add = true
