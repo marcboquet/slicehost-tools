@@ -22,4 +22,4 @@ and bob's you uncle!
 TODO
 ====
 
-Finish up the slice tool
+-Finish up the slice tool-
