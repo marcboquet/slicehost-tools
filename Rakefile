@@ -26,4 +26,4 @@ Rake::GemPackageTask.new(gem_spec) do |p|
   p.gem_spec = gem_spec
   p.need_tar = true
   p.need_zip = true
-end
+end                                                                           
