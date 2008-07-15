@@ -16,9 +16,27 @@ git clone git://github.com/cameroncox/slicehost-tools.git
     cd ..
     cd slicehost-tools
     rake gem
-    sudo gem install --local pkg/slicehost-tools-0.0.2.gem
+    sudo gem install --local pkg/slicehost-tools-0.0.3.gem
 
-and bob's you uncle!
+## Usage
+
+slicehost-dns
+
+    add [DOMAIN] [IP]    add a domain for the given ip
+    list                 lists all zones and their associated records
+    delete [DOMAIN]      removes a domain
+    apikey [APIKEY]      set your Slicehost API Key and save it to ~/.slicehost-tools
+    help [TASK]          describe available tasks or one specific task
+
+slicehost-slice
+
+    add [SLICE NAME] [--force]      add a new slice
+    delete [SLICE]                  delete a slice
+    list                            list slices
+    hard_reboot [SLICE]             perform a hard reboot
+    soft_reboot [SLICE]             perform a soft reboot
+    apikey [APIKEY]                 set your Slicehost API Key and save it to ~/.slicehost-tools
+    help [TASK]                     describe available tasks or one specific task
 
 
 ## TODO
