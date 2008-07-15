@@ -30,8 +30,10 @@ module Tools
     end
     
     desc "list", "lists all zones and their associated records"
-    def list(domain = nil)
-      Resources::Zone.find(:all).each do |zone|
+    def list(domain = nil)           
+      list_params   = { :origin => "#{domain}." } unless domain.nil?
+      list_params ||= {}
+      Resources::Zone.find(:all, :params => list_params).each do |zone|
         puts "+ #{zone.origin}"
         zone.records.each do |record|
           puts [' -', "[#{record.record_type}]".ljust(7, ' '), "#{record.name}"].join(' ')
