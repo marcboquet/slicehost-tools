@@ -16,7 +16,7 @@ git clone git://github.com/cameroncox/slicehost-tools.git
     cd ..
     cd slicehost-tools
     rake gem
-    sudo gem install --local pkg/slicehost-tools-0.0.1.gem
+    sudo gem install --local pkg/slicehost-tools-0.0.2.gem
 
 and bob's you uncle!
 
