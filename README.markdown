@@ -8,15 +8,10 @@ I am not responsible if this eats your data, destroys your life, and sleeps with
 
 ## Installation
 
-git clone git://github.com/wycats/thor.git  
-git clone git://github.com/cameroncox/slicehost-tools.git  
-
-    cd thor
-    rake install
-    cd ..
-    cd slicehost-tools
-    rake gem
-    sudo gem install --local pkg/slicehost-tools-0.0.3.gem
+	gem sources -a http://gems.github.com
+	
+	sudo gem install wycats-thor
+	sudo gem install uhlenbrock-slicehost-tools
 
 ## Usage
 

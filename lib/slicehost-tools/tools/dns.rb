@@ -17,16 +17,21 @@ module Tools
       end
 
       zone = Resources::Zone.new( :origin => "#{domain}.", :ttl => 3660, :active => "Y" )
-      zone.save
       
-      Resources::Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns1.slicehost.net" ).save
-      Resources::Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns2.slicehost.net" ).save
-      Resources::Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns3.slicehost.net" ).save
-      Resources::Record.new( :record_type => 'A',     :zone_id => zone.id, :name => "#{domain}.", :data => "#{ip}" ).save    
-      Resources::Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => "www",        :data => "#{domain}.").save
-      Resources::Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => "ftp",        :data => "#{domain}.").save
+      if zone.save
       
-      puts "#{domain} added successfully."
+        Resources::Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns1.slicehost.net" ).save
+        Resources::Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns2.slicehost.net" ).save
+        Resources::Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns3.slicehost.net" ).save
+        Resources::Record.new( :record_type => 'A',     :zone_id => zone.id, :name => "#{domain}.", :data => "#{ip}" ).save    
+        Resources::Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => "www",        :data => "#{domain}.").save
+        Resources::Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => "ftp",        :data => "#{domain}.").save
+      
+        puts "#{domain} added successfully."
+      else
+        puts "\n#{domain} could not be added."
+        puts zone.errors.full_messages.to_yaml
+      end
     end
     
     desc "list", "lists all zones and their associated records"
@@ -45,15 +50,16 @@ module Tools
     def delete(domain = nil)
       abort "You must give a domain" if domain.nil?
       
-      puts "Type the phrase \"Bob's your uncle\" to remove this zone"
+      puts "Type the phrase \"I am sure\" to remove this zone"
       @sure = false
       case STDIN.gets.chomp
-      when "Bob's your uncle"
+      when "I am sure"
         @sure = true
       end
       
       if @sure && domain
         Resources::Zone.find_by_origin(domain).destroy
+        puts "#{domain} is no more."
       else
         puts "aborting"
       end

@@ -1,4 +1,3 @@
 #!/usr/bin/env ruby
-$: << File.join( File.dirname(__FILE__), "..", "lib" )
-require 'slicehost-tools'            
+require File.dirname(__FILE__) + "/../lib/slicehost-tools"        
 require :"slicehost-tools" / :tools / :slice

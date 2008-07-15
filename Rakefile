@@ -20,7 +20,7 @@ gem_spec = Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/cameroncox/slicehost-tools/}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.1.1}
-  s.add_dependency("thor", ">= 0.9.2")      
+  s.add_dependency("wycats-thor", ">= 0.9.2")      
 end
 
 Rake::GemPackageTask.new(gem_spec) do |p|
