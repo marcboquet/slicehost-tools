@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = %q{cameroncox@gmail.com}
   s.executables = ["slicehost-dns", "slicehost-slice"]
   s.extra_rdoc_files = ["README.markdown", "LICENSE"]
-  s.files = ["bin", "bin/slicehost-dns", "bin/slicehost-slice", "lib", "lib/slicehost-tools", "lib/slicehost-tools/extlib", "lib/slicehost-tools/extlib/string.rb", "lib/slicehost-tools/extlib/symbol.rb", "lib/slicehost-tools/extlib.rb", "lib/slicehost-tools/resources", "lib/slicehost-tools/resources/dns.rb", "lib/slicehost-tools/resources/slice.rb", "lib/slicehost-tools/resources.rb", "lib/slicehost-tools/tools", "lib/slicehost-tools/tools/dns.rb", "lib/slicehost-tools/tools/slice.rb", "lib/slicehost-tools/tools.rb", "lib/slicehost-tools.rb", "LICENSE", "Rakefile", "README.markdown", "slicehost-tools.gemspec"]
+  s.files = ["bin", "bin/slicehost-dns", "bin/slicehost-slice", "lib/", "lib/slicehost-tools", "lib/slicehost-tools/extlib", "lib/slicehost-tools/extlib/string.rb", "lib/slicehost-tools/extlib/symbol.rb", "lib/slicehost-tools/extlib.rb", "lib/slicehost-tools/resources", "lib/slicehost-tools/resources/dns.rb", "lib/slicehost-tools/resources/slice.rb", "lib/slicehost-tools/resources.rb", "lib/slicehost-tools/tools", "lib/slicehost-tools/tools/dns.rb", "lib/slicehost-tools/tools/slice.rb", "lib/slicehost-tools/tools.rb", "lib/slicehost-tools.rb", "LICENSE", "Rakefile", "README.markdown", "slicehost-tools.gemspec"]
   # s.has_rdoc = false
   s.homepage = %q{http://github.com/cameroncox/slicehost-tools/}
   s.require_paths = ["lib"]
