@@ -7,8 +7,8 @@ module Tools
     desc "add [SLICE NAME]", "add a new slice"
     method_options :force => :boolean
     def add(slice_name, opts)               
-      images  = Resources::Image.find(:all)
-      flavors = Resources::Flavor.find(:all)
+      images  = ::Image.find(:all)
+      flavors = ::Flavor.find(:all)
             
       puts "Available Images: "      
       image_id = select_image_from(images)   
@@ -27,7 +27,7 @@ module Tools
       end
 
       if @add
-        slice = Resources::Slice.new(:name => slice_name, :flavor_id => flavor_id, :image_id => image_id)
+        slice = ::Slice.new(:name => slice_name, :flavor_id => flavor_id, :image_id => image_id)
         slice.save
       end
       
@@ -38,7 +38,7 @@ module Tools
       slice_name = select_slice.name if slice_name.nil?
         
       @abort = true
-      slice = Resources::Slice.find_by_name(slice_name)
+      slice = ::Slice.find_by_name(slice_name)
       puts "Please type 'I understand this is not undoable' to proceed: "
       case STDIN.gets.chomp
       when "I understand this is not undoable"
@@ -59,10 +59,21 @@ module Tools
     end
     
     desc "list", "list slices"
-    def list
-      Resources::Slice.find(:all).each do |slice|
-        puts "+ #{slice.name} (#{slice.ip_address})"
+    def list                            
+      ::Slice.find(:all).each do |slice|
+        puts "+ #{slice.name} (#{slice.addresses})"
       end
+    end
+                                                    
+    desc "status [SLICENAME]", "get information about a slice"
+    def status(slice_name = nil)
+      slice_name = select_slice.name if slice_name.nil?
+      
+      slice = ::Slice.find_by_name(slice_name)
+      puts "Name:               #{slice.name} (#{slice.addresses})"
+      puts "Flavor:             #{slice.flavor} (#{slice.image})"
+      puts "Status:             #{slice.status}"
+      puts "Bandwidth (in/out): #{slice.bw_in}/#{slice.bw_out}"
     end
 
     desc "hard_reboot [SLICE]", "perform a hard reboot"
@@ -85,7 +96,7 @@ module Tools
     protected
        
       def select_slice
-        slices = Resources::Slice.find(:all)
+        slices = ::Slice.find(:all)
         slices.each_index { |i| puts "[#{i}] #{slices[i].name}" }
         print "Select a Slice by #: "
         input = STDIN.gets.chomp.to_i
@@ -107,7 +118,7 @@ module Tools
       end
 
       def reboot(type, slice_name)
-        slice = Resources::Slice.find_by_name(slice_name)
+        slice = ::Slice.find_by_name(slice_name)
         slice.put(type)
       end
     

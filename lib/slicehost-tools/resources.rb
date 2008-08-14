@@ -6,9 +6,7 @@ else
   Tools::Default.start(['apikey'])
   exit
 end
-
-module Resources  
-  class Base < ActiveResource::Base
-    self.site = "http://#{SlicehostSecretKey}@api.slicehost.com" if defined?(SlicehostSecretKey)
-  end
+  
+class Resource < ActiveResource::Base
+  self.site = "http://#{SlicehostSecretKey}@api.slicehost.com" if defined?(SlicehostSecretKey)
 end

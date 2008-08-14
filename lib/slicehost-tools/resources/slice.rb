@@ -1,19 +1,28 @@
-module Resources
-  class Slice < Base 
-    class << self
-      def find_by_name(name)                           
-        find(:first, :params => { :name => name })
-      end
+class Address < String
+end
+
+class Slice < Resource
+  class << self
+    def find_by_name(name)                           
+      find(:first, :params => { :name => name })
     end
   end
   
-  class Flavor < Base
-    def to_s; self.name; 
-    end
-  end
+  def flavor
+    Flavor.find(flavor_id)
+  end                                       
   
-  class Image < Base
-    def to_s; self.name; 
-    end
+  def image
+    Image.find(image_id)
   end
 end
+
+class Flavor < Resource
+  def to_s; self.name; 
+  end
+end
+
+class Image < Resource
+  def to_s; self.name; 
+  end
+end 
