@@ -6,11 +6,7 @@
   end
 end
 
-# add the current directory to the search path...
-$: << File.expand_path( File.dirname(__FILE__) )
-                                                 
-require 'slicehost-tools/extlib'
-require :"slicehost-tools" / :resources
-require :"slicehost-tools" / :tools
+require File.dirname(__FILE__) + "/slicehost-tools/resources"
+require File.dirname(__FILE__) + "/slicehost-tools/tools"
                                           
 trap('INT') { exit }

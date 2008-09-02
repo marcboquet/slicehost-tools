@@ -1,8 +1,8 @@
 
-if File.exists? ENV['HOME'] / :".slicehost-tools"                                        
-  load ENV['HOME'] / :".slicehost-tools" 
+if File.exists? ENV['HOME'] + "/.slicehost-tools"                                        
+  load ENV['HOME'] + "/.slicehost-tools"
 else            
-  require :"slicehost-tools" / :tools              
+  require File.dirname(__FILE__) + "/tools"              
   Tools::Default.start(['apikey'])
   exit
 end

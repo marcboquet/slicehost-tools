@@ -1,4 +1,5 @@
-require :"slicehost-tools" / :resources / :dns
+require File.dirname(__FILE__) + "/../resources/dns"
+
 module Tools
   class DNS < Default
     
@@ -12,21 +13,19 @@ module Tools
       end
       
       unless ip
-        puts "Please give the IP to use for this domain"
+        puts "Please give the IP to use for this domain:"
         ip = STDIN.gets.chomp
       end
 
-      zone = Resources::Zone.new( :origin => "#{domain}.", :ttl => 3660, :active => "Y" )
+      zone = Zone.new( :origin => "#{domain}.", :ttl => 3660, :active => "Y" )
       
-      if zone.save
-      
-        Resources::Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns1.slicehost.net" ).save
-        Resources::Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns2.slicehost.net" ).save
-        Resources::Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns3.slicehost.net" ).save
-        Resources::Record.new( :record_type => 'A',     :zone_id => zone.id, :name => "#{domain}.", :data => "#{ip}" ).save    
-        Resources::Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => "www",        :data => "#{domain}.").save
-        Resources::Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => "ftp",        :data => "#{domain}.").save
-      
+      if zone.save     
+        Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns1.slicehost.net" ).save
+        Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns2.slicehost.net" ).save
+        Record.new( :record_type => 'NS',    :zone_id => zone.id, :name => "#{domain}.", :data => "ns3.slicehost.net" ).save
+        Record.new( :record_type => 'A',     :zone_id => zone.id, :name => "#{domain}.", :data => "#{ip}" ).save    
+        Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => "www",        :data => "#{domain}.").save
+        Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => "ftp",        :data => "#{domain}.").save    
         puts "#{domain} added successfully."
       else
         puts "\n#{domain} could not be added."
@@ -34,11 +33,31 @@ module Tools
       end
     end
     
+    desc "google_apps [DOMAIN] [IP]", "cofigure Google Apps for the given domain (new or existing)"
+    def google_apps(domain = nil, ip = nil)
+      unless domain
+        puts "Please give a domain to configure:"
+        domain = STDIN.gets.chomp
+      end
+      unless zone = Zone.find(:first, :params => { :origin => "#{domain}." })
+        add(domain, ip)
+        zone = Zone.find(:first, :params => { :origin => "#{domain}." })
+      end
+      
+      Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => "mail.",      :data => "ghs.google.com." ).save
+      Record.new( :record_type => 'MX',    :zone_id => zone.id, :name => "#{domain}.", :data => "ASPMX.L.GOOGLE.COM.",  :aux => "1" ).save
+      Record.new( :record_type => 'MX',    :zone_id => zone.id, :name => "#{domain}.", :data => "ALT1.ASPMX.L.GOOGLE.COM.",  :aux => "5" ).save
+      Record.new( :record_type => 'MX',    :zone_id => zone.id, :name => "#{domain}.", :data => "ALT2.ASPMX.L.GOOGLE.COM.",  :aux => "5" ).save
+      Record.new( :record_type => 'MX',    :zone_id => zone.id, :name => "#{domain}.", :data => "ASPMX2.GOOGLEMAIL.COM.",  :aux => "10" ).save
+      Record.new( :record_type => 'MX',    :zone_id => zone.id, :name => "#{domain}.", :data => "ASPMX3.GOOGLEMAIL.COM.",  :aux => "10" ).save
+      puts "#{domain} configured for Google Apps."
+    end
+    
     desc "list", "lists all zones and their associated records"
     def list(domain = nil)           
       list_params   = { :origin => "#{domain}." } unless domain.nil?
       list_params ||= {}
-      Resources::Zone.find(:all, :params => list_params).each do |zone|
+      Zone.find(:all, :params => list_params).each do |zone|
         puts "+ #{zone.origin}"
         zone.records.each do |record|
           puts [' -', "[#{record.record_type}]".ljust(7, ' '), "#{record.name}"].join(' ')
@@ -58,7 +77,7 @@ module Tools
       end
       
       if @sure && domain
-        Resources::Zone.find_by_origin(domain).destroy
+        Zone.find_by_origin(domain).destroy
         puts "#{domain} is no more."
       else
         puts "aborting"

@@ -1,4 +1,5 @@
-require :"slicehost-tools" / :resources / :slice
+require File.dirname(__FILE__) + "/../resources/slice"
+
 module Tools
   class Slice < Default
      

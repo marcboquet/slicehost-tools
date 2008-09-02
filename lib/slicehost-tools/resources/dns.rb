@@ -1,4 +1,4 @@
-class Zone < Base
+class Zone < Resource
   
   def records(reload = false)
     @records = nil if reload
@@ -12,5 +12,5 @@ class Zone < Base
   end                                                                
 end
 
-class Record < Base
+class Record < Resource
 end  

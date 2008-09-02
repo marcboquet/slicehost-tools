@@ -4,7 +4,7 @@ Manage Slicehost Slices and DNS records/zones from the command line.
 
 ## WARNING
 
-I am not responsible if this eats your data, destroys your life, and sleeps with your wife. YOU HAVE BEEN WARNED.
+I am not responsible if this eats your data or destroys your life. YOU HAVE BEEN WARNED.
 
 ## Installation
 
@@ -17,11 +17,12 @@ I am not responsible if this eats your data, destroys your life, and sleeps with
 
 slicehost-dns
 
-    add [DOMAIN] [IP]    add a domain for the given ip
-    list                 lists all zones and their associated records
-    delete [DOMAIN]      removes a domain
-    apikey [APIKEY]      set your Slicehost API Key and save it to ~/.slicehost-tools
-    help [TASK]          describe available tasks or one specific task
+    add [DOMAIN] [IP]    			add a domain for the given ip
+	google_apps [DOMAIN] [IP]		cofigure Google Apps for the given domain (new or existing)
+    list                 			lists all zones and their associated records
+    delete [DOMAIN]      			removes a domain
+    apikey [APIKEY]      			set your Slicehost API Key and save it to ~/.slicehost-tools
+    help [TASK]          			describe available tasks or one specific task
 
 slicehost-slice
 
