@@ -14,6 +14,7 @@ end
 
 class Record < Resource
   def self.to_zone_rr(options = {})
-    "%-20s %-10s IN %-10s %s" % [options[:name], options[:ttl], options[:type], options[:data]]
+    id = "; ID=#{options[:id]}" if options[:id]
+    "%-20s %-10s IN %-10s %-25s %s" % [options[:name], options[:ttl], options[:type], options[:data], id]
   end
 end  

@@ -72,7 +72,7 @@ module Tools
 
       puts "\$ORIGIN #{zone.origin.sub(/\.$/, '')}"
       puts "\$TTL #{zone.ttl}"
-      puts "@ IN SOA ns.slicehost.net. #{ENV['USER']}.#{zone.origin} ("
+      puts "@ IN SOA ns.slicehost.net. hostmaster.#{zone.origin} ("
       puts "  %-14s ; serial number" % Time.now.strftime('%Y%m%d%H%M%S')
       puts "  %-14s ; time to refresh" % '1d'
       puts "  %-14s ; time to retry" % '1d'
@@ -108,7 +108,8 @@ module Tools
             when 'TXT'
               data = "\"#{record.data}\""
           end
-          puts Record.to_zone_rr(:name => name,
+          puts Record.to_zone_rr(:id => record.id,
+                                 :name => name,
                                  :ttl => ttl,
                                  :type => record.record_type,
                                  :data => data)
