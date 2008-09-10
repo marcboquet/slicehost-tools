@@ -9,7 +9,7 @@ gem_spec = Gem::Specification.new do |s|
   s.specification_version = 2 if s.respond_to? :specification_version=
  
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Cameron Cox", "Bobby Uhlenbrock"]
+  s.authors = ["Cameron Cox", "Bobby Uhlenbrock", "Corey Martella"]
   s.date = %q{2008-09-02}
   s.summary = %q{tools utilizing the slicehost api}
   s.email = %q{cameroncox@gmail.com}
@@ -17,7 +17,7 @@ gem_spec = Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.markdown", "LICENSE"]
   s.files = Dir['**/**'].reject!{ |f| f =~ /pkg/i }
   s.has_rdoc = false
-  s.homepage = %q{http://github.com/uhlenbrock/slicehost-tools/}
+  s.homepage = %q{http://github.com/coreymartella/slicehost-tools/}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.1.1}
   s.add_dependency("wycats-thor", ">= 0.9.2")      
