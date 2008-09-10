@@ -64,7 +64,49 @@ module Tools
         end
       end 
     end
-    
+
+    desc "tozonefile", "output a zone file for the given domain"
+    def tozonefile(domain = nil)           
+      abort "You must give a domain" if domain.nil?
+      zone = Zone.find_by_origin(domain)
+
+      puts "\$ORIGIN #{zone.origin.sub(/\.$/, '')}"
+      puts "\$TTL #{zone.ttl}"
+      puts "@ IN SOA ns.slicehost.net. #{ENV['USER']}.#{zone.origin} ("
+      puts "#{Time.now.strftime('%Y%m%d%H%M%S')} ; serial number"
+      puts "1d         ; time to refresh"
+      puts "1d         ; time to retry"
+      puts "4w         ; time to expire"
+      puts "1h         ; minimum ttl"
+      puts ")"
+
+      [1,2,3].each do |i|
+        puts Record.to_zone_rr(:name => '@',
+                               :type => 'NS',
+                               :data => "ns#{i}.slicehost.net")
+      end
+
+      sort_order = ['NS', 'MX', 'TXT', 'SRV', 'A', 'PTR', 'AAAA', 'CNAME']
+      zone.records.sort {|a,b| sort_order.index(a.record_type) <=> sort_order.index(b.record_type)}.each do |record|
+        name = record.name == zone.origin ? '@' : record.name
+        ttl = '' if record.ttl == zone.ttl
+        aux = ''
+        data = record.data
+        case record.record_type
+          when 'MX'
+            data = "#{record.aux} #{data}"
+          when 'SRV'
+            data = "#{record.aux} #{data}"
+          when 'TXT'
+            data = "\"#{record.data}\""
+        end
+        puts Record.to_zone_rr(:name => name,
+                               :ttl => ttl,
+                               :type => record.record_type,
+                               :data => data)
+      end
+    end
+
     desc "delete [DOMAIN]", "removes a domain"
     def delete(domain = nil)
       abort "You must give a domain" if domain.nil?

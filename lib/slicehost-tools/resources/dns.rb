@@ -13,4 +13,7 @@ class Zone < Resource
 end
 
 class Record < Resource
+  def self.to_zone_rr(options = {})
+    "%-20s %-10s IN %-10s %s" % [options[:name], options[:ttl], options[:type], options[:data]]
+  end
 end  
