@@ -73,37 +73,46 @@ module Tools
       puts "\$ORIGIN #{zone.origin.sub(/\.$/, '')}"
       puts "\$TTL #{zone.ttl}"
       puts "@ IN SOA ns.slicehost.net. #{ENV['USER']}.#{zone.origin} ("
-      puts "#{Time.now.strftime('%Y%m%d%H%M%S')} ; serial number"
-      puts "1d         ; time to refresh"
-      puts "1d         ; time to retry"
-      puts "4w         ; time to expire"
-      puts "1h         ; minimum ttl"
+      puts "  %-14s ; serial number" % Time.now.strftime('%Y%m%d%H%M%S')
+      puts "  %-14s ; time to refresh" % '1d'
+      puts "  %-14s ; time to retry" % '1d'
+      puts "  %-14s ; time to expire" % '4w'
+      puts "  %-14s ; minimum ttl" % '1h'
       puts ")"
-
+      puts ""
       [1,2,3].each do |i|
         puts Record.to_zone_rr(:name => '@',
                                :type => 'NS',
                                :data => "ns#{i}.slicehost.net")
       end
 
-      sort_order = ['NS', 'MX', 'TXT', 'SRV', 'A', 'PTR', 'AAAA', 'CNAME']
-      zone.records.sort {|a,b| sort_order.index(a.record_type) <=> sort_order.index(b.record_type)}.each do |record|
-        name = record.name == zone.origin ? '@' : record.name
-        ttl = '' if record.ttl == zone.ttl
-        aux = ''
-        data = record.data
-        case record.record_type
-          when 'MX'
-            data = "#{record.aux} #{data}"
-          when 'SRV'
-            data = "#{record.aux} #{data}"
-          when 'TXT'
-            data = "\"#{record.data}\""
+      records_by_type = {}
+      zone.records.each do |r|
+        records_by_type[r.record_type] ||= []
+        records_by_type[r.record_type] << r
+      end
+
+      ['NS', 'MX', 'TXT', 'SRV', 'A', 'PTR', 'AAAA', 'CNAME'].each do |type|
+        next if records_by_type[type].nil?
+        puts ""
+        records_by_type[type].sort {|a,b| a.name == zone.origin ? -1 : a.name <=> b.name}.each do |record|
+          name = record.name == zone.origin ? '@' : record.name
+          ttl = '' if record.ttl == zone.ttl
+          aux = ''
+          data = record.data
+          case record.record_type
+            when 'MX'
+              data = "#{record.aux} #{data}"
+            when 'SRV'
+              data = "#{record.aux} #{data}"
+            when 'TXT'
+              data = "\"#{record.data}\""
+          end
+          puts Record.to_zone_rr(:name => name,
+                                 :ttl => ttl,
+                                 :type => record.record_type,
+                                 :data => data)
         end
-        puts Record.to_zone_rr(:name => name,
-                               :ttl => ttl,
-                               :type => record.record_type,
-                               :data => data)
       end
     end
 
