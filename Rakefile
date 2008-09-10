@@ -15,12 +15,13 @@ gem_spec = Gem::Specification.new do |s|
   s.email = %q{cameroncox@gmail.com}
   s.executables = ["slicehost-dns", "slicehost-slice"]
   s.extra_rdoc_files = ["README.markdown", "LICENSE"]
-  s.files = Dir['**/**'].reject!{ |f| f =~ /pkg/i }
+  s.files = Dir['**/**'].reject{ |f| f =~ /pkg/i }
   s.has_rdoc = false
   s.homepage = %q{http://github.com/uhlenbrock/slicehost-tools/}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.1.1}
   s.add_dependency("wycats-thor", ">= 0.9.2")      
+  s.add_dependency("activeresource", ">= 2.1.1")      
 end
 
 Rake::GemPackageTask.new(gem_spec) do |p|
