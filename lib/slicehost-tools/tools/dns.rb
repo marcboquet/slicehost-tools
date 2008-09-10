@@ -136,7 +136,70 @@ module Tools
       end
     end
 
+    desc "add_a [DOMAIN] [NAME] [IP]", "Add an A record to an existing domain"
+    def add_a(domain=nil,name=nil,ip=nil)
+      unless domain
+        puts "Please give a domain to configure:"
+        domain = STDIN.gets.chomp
+      end
+      #lookup the zone
+      unless zone = Zone.find(:first, :params => { :origin => "#{domain}." })
+        error "Zone #{domain} does not exist, use slicetool-dns add #{domain} IP first!"
+      end
+      unless name
+        puts "Please give a name to configure:"
+        name = STDIN.gets.chomp
+      end
+      unless ip
+        puts "Please give a IP to map:"
+        ip = STDIN.gets.chomp
+      end
+      Record.new( :record_type => 'A',     :zone_id => zone.id, :name => name, :data => "#{ip}" ).save    
+      puts "Added #{name} ==> #{ip} to #{domain}"
+    end
+    desc "add_cname [DOMAIN] [NAME] [CNAME]", "Add a CNAME record to an existing domain" 
+    def add_cname(domain,name,cname)
+      unless domain
+        puts "Please give a domain to configure:"
+        domain = STDIN.gets.chomp
+      end
+      #lookup the zone
+      unless zone = Zone.find(:first, :params => { :origin => "#{domain}." })
+        error "Zone #{domain} does not exist, use slicetool-dns add #{domain} IP first!"
+      end
+      unless name
+        puts "Please give a name to configure:"
+        name = STDIN.gets.chomp
+      end
+      unless cname
+        puts "Please give a CNAME to map:"
+        cname = STDIN.gets.chomp
+      end
+      Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => name, :data => cname ).save    
+      puts "Added #{name} ==> #{cname} to #{domain}"
+    end
+    desc "add_assets [DOMAIN] [IP]", "Add a assets0..3 to an existing domain" 
+    
+    def add_assets(domain,ip)
+      unless domain
+        puts "Please give a domain to configure:"
+        domain = STDIN.gets.chomp
+      end
+      #lookup the zone
+      unless zone = Zone.find(:first, :params => { :origin => "#{domain}." })
+        error "Zone #{domain} does not exist, use slicetool-dns add #{domain} IP first!"
+      end
+      unless ip
+        puts "Please give a IP to map:"
+        cname = STDIN.gets.chomp
+      end
+      0.upto(3) do |i|
+        Record.new( :record_type => 'A', :zone_id => zone.id, :name => "assets#{i}" , :data => ip).save
+      end
+      puts "Added 4 assets hosts at ip to #{domain}"
+    end
     # init Thor
     start 
+    
   end
 end
