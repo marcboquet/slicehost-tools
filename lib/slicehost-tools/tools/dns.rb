@@ -65,8 +65,8 @@ module Tools
       end 
     end
 
-    desc "tozonefile", "output a zone file for the given domain"
-    def tozonefile(domain = nil)           
+    desc "to_zonefile", "output a zone file for the given domain"
+    def to_zonefile(domain = nil)           
       abort "You must give a domain" if domain.nil?
       zone = Zone.find_by_origin(domain)
 

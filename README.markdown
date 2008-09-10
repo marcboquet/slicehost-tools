@@ -23,6 +23,7 @@ slicehost-dns
     delete [DOMAIN]      			removes a domain
     apikey [APIKEY]      			set your Slicehost API Key and save it to ~/.slicehost-tools
     help [TASK]          			describe available tasks or one specific task
+	to_zonefile [DOMAIN]			output a zone file for the given domain
 
 slicehost-slice
 
@@ -33,7 +34,6 @@ slicehost-slice
     soft_reboot [SLICE]             perform a soft reboot
     apikey [APIKEY]                 set your Slicehost API Key and save it to ~/.slicehost-tools
     help [TASK]                     describe available tasks or one specific task
-
 
 ## TODO
 
