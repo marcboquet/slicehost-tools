@@ -87,4 +87,45 @@ module Tools
     # init Thor
     start 
   end
+  desc "Add a record to an existing domain"
+  def add_a_record(domain,name,ip)
+    unless domain
+      puts "Please give a domain to configure:"
+      domain = STDIN.gets.chomp
+    end
+    #lookup the zone
+    unless zone = Zone.find(:first, :params => { :origin => "#{domain}." })
+      error "Zone #{domain} does not exist, use slicetool-dns add #{domain} IP first!"
+    end
+    unless name
+      puts "Please give a name to configure:"
+      name = STDIN.gets.chomp
+    end
+    unless ip
+      puts "Please give a IP to map:"
+      ip = STDIN.gets.chomp
+    end
+    Record.new( :record_type => 'A',     :zone_id => zone.id, :name => name, :data => "#{ip}" ).save    
+    puts "Added #{name} ==> #{ip} to #{domain}"
+  end
+  def add_cname_record(domain,name,cname)
+    unless domain
+      puts "Please give a domain to configure:"
+      domain = STDIN.gets.chomp
+    end
+    #lookup the zone
+    unless zone = Zone.find(:first, :params => { :origin => "#{domain}." })
+      error "Zone #{domain} does not exist, use slicetool-dns add #{domain} IP first!"
+    end
+    unless name
+      puts "Please give a name to configure:"
+      name = STDIN.gets.chomp
+    end
+    unless cname
+      puts "Please give a CNAME to map:"
+      cname = STDIN.gets.chomp
+    end
+    Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => name, :data => "#{ip}" ).save    
+    puts "Added #{name} ==> #{ip} to #{domain}"
+  end
 end
