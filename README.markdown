@@ -20,6 +20,7 @@ slicehost-dns
     add [DOMAIN] [IP]                  add a domain for the given ip
     google_apps [DOMAIN] [IP]          configure Google Apps for the given domain (new or existing)
     add_a [DOMAIN] [NAME] [IP]         add a A record to an existing domain
+    add_assets [DOMAIN] [IP]           add a 4 assets hosts (assets0..assets3) to an existing domain
     add_cname [DOMAIN] [NAME] [CNAME]  add a CNAME record to an existing domain
     list                               lists all zones and their associated records
     delete [DOMAIN]                    removes a domain

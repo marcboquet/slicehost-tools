@@ -126,6 +126,26 @@ module Tools
       Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => name, :data => cname ).save    
       puts "Added #{name} ==> #{cname} to #{domain}"
     end
+    desc "add_assets [DOMAIN] [IP]", "Add a assets0..3 to an existing domain" 
+    
+    def add_assets(domain,ip)
+      unless domain
+        puts "Please give a domain to configure:"
+        domain = STDIN.gets.chomp
+      end
+      #lookup the zone
+      unless zone = Zone.find(:first, :params => { :origin => "#{domain}." })
+        error "Zone #{domain} does not exist, use slicetool-dns add #{domain} IP first!"
+      end
+      unless ip
+        puts "Please give a IP to map:"
+        cname = STDIN.gets.chomp
+      end
+      0.upto(3) do |i|
+        Record.new( :record_type => 'A', :zone_id => zone.id, :name => "assets#{i}" , :data => ip).save
+      end
+      puts "Added 4 assets hosts at ip to #{domain}"
+    end
     # init Thor
     start 
     
