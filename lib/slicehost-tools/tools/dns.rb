@@ -123,8 +123,8 @@ module Tools
         puts "Please give a CNAME to map:"
         cname = STDIN.gets.chomp
       end
-      Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => name, :data => "#{ip}" ).save    
-      puts "Added #{name} ==> #{ip} to #{domain}"
+      Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => name, :data => cname ).save    
+      puts "Added #{name} ==> #{cname} to #{domain}"
     end
     # init Thor
     start 
