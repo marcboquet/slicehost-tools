@@ -6,7 +6,7 @@ module Tools
          "set your Slicehost API Key and save it to ~/.slicehost-tools"
     def apikey(apikey = nil)
       @write_file = false
-      unless File.exists? ENV['HOME'] / '.slicehost-tools' 
+      unless File.exists? File.join(ENV['HOME'], '.slicehost-tools')
         @write_file = true
       else
         # it does exist, ask.
@@ -25,7 +25,7 @@ module Tools
       
       # write the api key to file
       if @write_file
-        File.open( ENV['HOME'] / '.slicehost-tools', File::RDWR|File::TRUNC|File::CREAT, 0664 ) do |f|
+        File.open( File.join(ENV['HOME'], '.slicehost-tools'), File::RDWR|File::TRUNC|File::CREAT, 0664 ) do |f|
           f.puts "SlicehostSecretKey = '#{apikey}'"
           f.close
         end
