@@ -53,7 +53,7 @@ module Tools
       puts "#{domain} configured for Google Apps."
     end
     
-    desc "list", "lists all zones and their associated records"
+    desc "list [DOMAIN]", "lists all zones and their associated records"
     def list(domain = nil)           
       list_params   = { :origin => "#{domain}." } unless domain.nil?
       list_params ||= {}
@@ -65,7 +65,7 @@ module Tools
       end 
     end
 
-    desc "to_zonefile", "output a zone file for the given domain"
+    desc "to_zonefile [DOMAIN]", "output a zone file for the given domain"
     def to_zonefile(domain = nil)           
       abort "You must give a domain" if domain.nil?
       zone = Zone.find_by_origin(domain)
