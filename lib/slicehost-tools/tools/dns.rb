@@ -44,7 +44,7 @@ module Tools
         zone = Zone.find(:first, :params => { :origin => "#{domain}." })
       end
       
-      Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => "mail.",      :data => "ghs.google.com." ).save
+      Record.new( :record_type => 'CNAME', :zone_id => zone.id, :name => "mail",      :data => "ghs.google.com." ).save
       Record.new( :record_type => 'MX',    :zone_id => zone.id, :name => "#{domain}.", :data => "ASPMX.L.GOOGLE.COM.",  :aux => "1" ).save
       Record.new( :record_type => 'MX',    :zone_id => zone.id, :name => "#{domain}.", :data => "ALT1.ASPMX.L.GOOGLE.COM.",  :aux => "5" ).save
       Record.new( :record_type => 'MX',    :zone_id => zone.id, :name => "#{domain}.", :data => "ALT2.ASPMX.L.GOOGLE.COM.",  :aux => "5" ).save
