@@ -2,7 +2,7 @@
 if File.exists? File.join(ENV['HOME'], ".slicehost-tools")
   load File.join(ENV['HOME'], ".slicehost-tools")
 else            
-  require File.dirname(File.join(__FILE__, "tools"))
+  require File.expand_path(File.dirname(__FILE__) + "/tools")
   Tools::Default.start(['apikey'])
   exit
 end
