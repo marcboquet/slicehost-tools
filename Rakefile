@@ -28,4 +28,15 @@ Rake::GemPackageTask.new(gem_spec) do |p|
   p.gem_spec = gem_spec
   p.need_tar = true
   p.need_zip = true
-end                                                                           
+end
+
+namespace :gem do
+  namespace :spec do
+    desc "Update slicehost-tools.gemspec"
+    task :generate do
+      File.open("slicehost-tools", "w") do |f|
+        f.puts(gem_spec.to_ruby)
+      end
+    end
+  end
+end
