@@ -4,7 +4,7 @@ require 'rake/gempackagetask'
 
 gem_spec = Gem::Specification.new do |s|
   s.name = %q{slicehost-tools}
-  s.version = "0.0.7"
+  s.version = "0.0.8"
  
   s.specification_version = 2 if s.respond_to? :specification_version=
  
@@ -34,7 +34,7 @@ namespace :gem do
   namespace :spec do
     desc "Update slicehost-tools.gemspec"
     task :generate do
-      File.open("slicehost-tools", "w") do |f|
+      File.open("slicehost-tools.gemspec", "w") do |f|
         f.puts(gem_spec.to_ruby)
       end
     end
