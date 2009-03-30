@@ -10,8 +10,8 @@ I am not responsible if this eats your data or destroys your life. YOU HAVE BEEN
 
 	gem sources -a http://gems.github.com
 	
-	sudo gem install wycats-thor
-	sudo gem install uhlenbrock-slicehost-tools
+	sudo gem install thor
+	sudo gem install booster-slicehost-tools
 
 ## Usage
 
