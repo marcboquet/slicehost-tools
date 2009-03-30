@@ -7,19 +7,19 @@ module Tools
     
     desc "add [SLICE NAME]", "add a new slice"
     method_options :force => :boolean
-    def add(slice_name, opts)               
+    def add(slice_name)
       images  = ::Image.find(:all)
       flavors = ::Flavor.find(:all)
             
-      puts "Available Images: "      
-      image_id = select_image_from(images)   
+      puts "Available Images: "
+      image_id = select_image_from(images)
       
       puts "Available Flavors: "
-      flavor_id = select_flavor_from(flavors)
+      flavor_id = select_flavor_from(flavosrs)
       
       @add = false
       # confirm  you want to do this, it does cost money
-      unless opts[:force]     
+      unless options[:force]     
         print "Are you sure you want do this? [y/N]: "
         case STDIN.gets.chomp
         when /y/i
