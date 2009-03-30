@@ -4,7 +4,7 @@ require 'rake/gempackagetask'
 
 gem_spec = Gem::Specification.new do |s|
   s.name = %q{slicehost-tools}
-  s.version = "0.0.8"
+  s.version = "0.0.9"
  
   s.specification_version = 2 if s.respond_to? :specification_version=
  
@@ -17,7 +17,7 @@ gem_spec = Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.markdown", "LICENSE"]
   s.files = Dir['**/**'].reject{ |f| f =~ /pkg/i }
   s.has_rdoc = false
-  s.homepage = %q{http://github.com/uhlenbrock/slicehost-tools/}
+  s.homepage = %q{http://github.com/booster/slicehost-tools/}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.1.1}
   s.add_dependency("wycats-thor", ">= 0.9.2")      
