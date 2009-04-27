@@ -15,7 +15,7 @@ module Tools
       image_id = select_image_from(images)
       
       puts "Available Flavors: "
-      flavor_id = select_flavor_from(flavosrs)
+      flavor_id = select_flavor_from(flavors)
       
       @add = false
       # confirm  you want to do this, it does cost money
