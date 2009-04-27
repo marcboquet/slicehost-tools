@@ -38,7 +38,6 @@ slicehost-slice
     apikey [APIKEY]                    set your Slicehost API Key and save it to ~/.slicehost-tools
     help [TASK]                        describe available tasks or one specific task
 
-## TODO
+## Contributing
 
-[DONE] Finish up the slice tool  
-Multiple Slicehost accounts? (not likely, but an idea)         
+Feel free to fork and send pull requests via github. 
