@@ -8,5 +8,5 @@ else
 end
   
 class Resource < ActiveResource::Base
-  self.site = "http://#{SlicehostSecretKey}@api.slicehost.com" if defined?(SlicehostSecretKey)
+  self.site = "https://#{SlicehostSecretKey}@api.slicehost.com" if defined?(SlicehostSecretKey)
 end
