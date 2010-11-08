@@ -1,4 +1,4 @@
-%w( rubygems thor activeresource fileutils ).each do |dep|
+%w( rubygems thor active_resource fileutils ).each do |dep|
   begin
     require dep
   rescue LoadError
